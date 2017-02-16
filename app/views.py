@@ -1,3 +1,5 @@
+import json
+
 from flask import jsonify, request, render_template, flash, redirect
 from app import app
 from .forms import LoginForm
@@ -37,8 +39,8 @@ def login():
 @app.route('/contents', methods=['GET', 'POST'])
 def contents():
     
-    json_dict = request.get_json()
-
-    answer = {'AA': 'aaa'}
+    json_data = request.get_json()
+#    req_data = json.loads(json_data)
+    answer = {'pojama': 'people special'}
     return jsonify(answer)
 
