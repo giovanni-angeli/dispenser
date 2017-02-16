@@ -1,6 +1,7 @@
-from flask import render_template, flash, redirect
+from flask import jsonify, request, render_template, flash, redirect
 from app import app
 from .forms import LoginForm
+
 
 @app.route('/')
 @app.route('/index')
@@ -36,7 +37,7 @@ def login():
 @app.route('/contents', methods=['GET', 'POST'])
 def contents():
     
-    json_dict = requests.get_json()
+    json_dict = request.get_json()
 
     answer = {'AA': 'aaa'}
     return jsonify(answer)
