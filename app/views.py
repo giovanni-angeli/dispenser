@@ -4,19 +4,32 @@ from flask import jsonify, request, render_template, flash, redirect
 from app import app
 from .forms import LoginForm
 
+"""
+# ~ It's written in 11/8 time 
+# ~ Key: F Mayor
+# ~ Tempo: around 140 (eight note)
+# ~ [Main riff]
+  # ~ 1 $ 2 $ 3 $ 1 $ 2 $ 3 $ 1 & 2 $ 3 $ 1 & 2 $  
+# ~ e|--------------------0-----------------------|
+# ~ B|----------------6-------8-------------------|
+# ~ G|------------5---------------7---------------|
+# ~ D|--------0-----------------------0-----------|
+# ~ A|----0-------------------------------0-------|
+# ~ E|6---------------------------------------8---| 
+"""
 
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Miguel'}  # fake user
+    user = {'nickname': 'Joe'}  
     posts = [  # fake array of posts
         { 
-            'author': {'nickname': 'John'}, 
-            'body': 'Beautiful day in Portland!' 
+            'author': {'nickname': 'Bob'}, 
+            'body': "That's what's the deal we're dealing in" 
         },
         { 
             'author': {'nickname': 'Susan'}, 
-            'body': 'The Avengers movie was so cool!' 
+            'body': 'You should never smoke in pajamas' 
         }
     ]
     return render_template("index.html",
@@ -36,11 +49,17 @@ def login():
                            form=form)
 
 
-@app.route('/contents', methods=['GET', 'POST'])
-def contents():
+@app.route('/api/contents/<uid>', methods=['GET'])
+def contents(uid):
     
     json_data = request.get_json()
-#    req_data = json.loads(json_data)
-    answer = {'pojama': 'people special'}
+    
+    print("uid: {}".format(uid))
+    print("json_data: {}".format(json_data))
+
+    answer = {
+        'uid': uid,
+        'pojama': 'people special'
+    }
     return jsonify(answer)
 
